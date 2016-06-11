@@ -55,9 +55,11 @@ The alignment line is identified with a 'A' character, having 10 mandatory field
 
 * **identifier:A** must be `'A'`
 * **name:Z** unique name of the alignment (string w/spaces)
+* **aname:Z** name of the sequence segment A
 * **apos:i** segment-local index (0-origin) of the alignment start position on the sequence segment A
 * **alen:i** length of the alignment on the sequence segment A
 * **adir:A** direction of the alignment, `'+'`(forward) or `'-'`(reverse)
+* **bname:Z** name of the sequence segment B
 * **bpos:i** segment-local index of the alignment start position on the sequence segment B
 * **blen:i** length of the alignment on the sequence segment B
 * **bdir:A** direction of the alignment on the sequence segment B
