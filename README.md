@@ -1,6 +1,7 @@
 # Proposal of Graphical-Pairwise-Alignment (GPA) format
 
-(2016/6/11) proposal of a GPA format, Hajime Suzuki
+* 2016/6/17 first update, next and previous alignment name were moved to mandatory fields
+* 2016/6/11 proposal of a GPA format, Hajime Suzuki
 
 
 ## Overview
@@ -64,17 +65,17 @@ The alignment line is identified with a 'A' character, having 10 mandatory field
 * **blen:i** length of the alignment on the sequence segment B
 * **bdir:A** direction of the alignment on the sequence segment B
 * **cigar:Z** CIGAR string of the alignment
+* **prev** name of the previous (upstream) alignment
+* **next** name of the next (downstream) alignment
 
 #### Optional fields
 
 * **MQ:i** mapping quality
-* **NA:Z** name of the next (downstream) alignment
-* **PA:Z** name of the previous (upstream) alignment
 
 #### Example
 
 ```
-A	0	sec0	0	4	+	sec1	0	4	+	4M	MQ:i:255
+A	0	sec0	0	4	+	sec1	0	4	+	4M	*	*	MQ:i:255
 ```
 
 
@@ -84,12 +85,12 @@ The example below represents a set of mappings of three sequences to a graphical
 
 ```
 H	VN:Z:0.1
-A	0	A	0	4	+	read1	0	4	+	4M	MQ:i:255	NA:Z:1
-A	1	B	0	4	+	read1	4	4	+	4M	MQ:i:255	NA:Z:0	PA:Z:2
-A	2	D	0	8	+	read1	8	8	+	8M	MQ:i:255	PA:Z:1
-A	3	A	0	4	+	read2	0	4	+	4M	MQ:i:255	NA:Z:4
-A	4	D	0	8	+	read2	4	8	+	8M	MQ:i:255	PA:Z:3
-A	5	D	4	4	-	read3	16	4	+	4M	MQ:i:255	NA:Z:6
-A	6	C	12	12	-	read3	4	12	+	12M	MQ:i:255	NA:Z:7	PA:Z:5
-A	7	A	4	4	-	read3	0	4	+	4M	MQ:i:255	PA:Z:6
+A	0	A	0	4	+	read1	0	4	+	4M	*	1	MQ:i:255
+A	1	B	0	4	+	read1	4	4	+	4M	0	2	MQ:i:255
+A	2	D	0	8	+	read1	8	8	+	8M	1	*	MQ:i:255
+A	3	A	0	4	+	read2	0	4	+	4M	*	4	MQ:i:255
+A	4	D	0	8	+	read2	4	8	+	8M	3	*	MQ:i:255
+A	5	D	4	4	-	read3	16	4	+	4M	*	6	MQ:i:255
+A	6	C	12	12	-	read3	4	12	+	12M	5	7	MQ:i:255
+A	7	A	4	4	-	read3	0	4	+	4M	6	*	MQ:i:255
 ```
